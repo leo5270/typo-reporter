@@ -77,7 +77,9 @@ TypoReporter.prototype.render = function () {
 		el('div', {class: 'ReportTypo-header'}, i18n.header),
 		el('div', {class: 'ReportTypo-label'}, i18n.messageLabel),
 		el('div', {class: 'ReportTypo-message'}, state.snippet.replace('>>>', '<u class="ReportTypo-heighlight">').replace('<<<', '</u>')),
-		el('textarea', {class: 'ReportTypo-comment', onKeyup: this.handleCommentChange}, state.comment),
+		el('div', {class: 'ReportTypo-comment-container'}, [
+			el('textarea', {class: 'ReportTypo-comment', onKeyup: this.handleCommentChange}, state.comment)
+		]),
 		el('div', {class: 'ReportTypo-label'}, i18n.commentLabel),
 		el('div', {style: 'text-align: right;'}, [
 			el('button', {type: 'button', class: 'ReportTypo-submit', onClick: this.submit}, state.isSending ? i18n.sending : i18n.send),
