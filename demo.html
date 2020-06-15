@@ -22,13 +22,18 @@
 
 		<p>Select some text containing a typo on this page and hit "CTRL+Enter"</p>
 		<p>This txet <b>contins</b> a bnuch of typos.</p>
-		<script src="lib/TypoReporter.min.js"></script>
+		<script src="lib/TypoReporter.js"></script>
 		<script type="text/javascript">
 			var rootNode = document.createElement('div');
 			document.body.appendChild(rootNode);
 
 			var typo = new TypoReporter({
-				formId: '1FAIpQLSd4bAaZYLlY38abAVosRCuZw9jJpe18sXK522IyftFYQdkvkg'
+        formId: '1a', // required, see previous step
+        offset: 30, // amount of context text to grab from before and after the selection, defaults to 50
+        endpointUrl: 'http://localhost:3000/api/v1/typo_reports', // optional, defaults to Google Forms
+        snippetFieldName: 'snippet', // optional, if using custom form
+        commentFieldName: 'comment', // optional, if using custom form
+        urlFieldName: 'page_url' // optional, if using custom form
 			}, rootNode);
 		</script>
 	</body>

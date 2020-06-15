@@ -103,28 +103,32 @@ TypoReporter.prototype.submit =	function () {
 	state.isSending = true;
 	this.refresh();
 
-	var formData = new FormData();
-	formData.append(props.snippetFieldName, state.snippet);
-	formData.append(props.commentFieldName, state.comment);
-	formData.append(props.urlFieldName, window.location);
-
-	var request = new XMLHttpRequest();
-	request.open('POST', props.endpointUrl, true);
-	request.onload = function () {
-		if (request.status >= 200 && request.status < 400) {
-			this.closeDialog();
-		} else {
-			state.isError = true;
-			state.isSending = false;
-			this.refresh();
+	var data = {
+		data: {
+			[props.snippetFieldName]: state.snippet,
+			[props.commentFieldName]: state.comment,
+			[props.urlFieldName]: window.location.href,
+			'language': props.locale
 		}
-	}.bind(this);
-	request.onerror = function () {
+	};
+
+	fetch(props.endpointUrl, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(data)
+	})
+	.then(response => response.json())
+	.then(() => {
+		this.closeDialog();
+	})
+	.catch(err => {
+		console.error(err);
 		state.isError = true;
 		state.isSending = false;
 		this.refresh();
-	}.bind(this);
-	request.send(formData);
+	});
 };
 
 TypoReporter.prototype.getSnippet = function () {
