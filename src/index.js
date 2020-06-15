@@ -74,6 +74,7 @@ TypoReporter.prototype.render = function () {
 	var i18n = this.i18n;
 
 	return state.isOpen && el('div', {class: 'ReportTypo'}, [
+		el('button', {type: 'button', class: 'ReportTypo-cancel', onClick: this.closeDialog}),
 		el('div', {class: 'ReportTypo-header'}, i18n.header),
 		el('div', {class: 'ReportTypo-label'}, i18n.messageLabel),
 		el('div', {class: 'ReportTypo-message'}, state.snippet.replace('>>>', '<u class="ReportTypo-heighlight">').replace('<<<', '</u>')),
@@ -82,8 +83,7 @@ TypoReporter.prototype.render = function () {
 		]),
 		el('div', {class: 'ReportTypo-label'}, i18n.commentLabel),
 		el('div', {style: 'text-align: right;'}, [
-			el('button', {type: 'button', class: 'ReportTypo-submit', onClick: this.submit}, state.isSending ? i18n.sending : i18n.send),
-			el('button', {type: 'button', class: 'ReportTypo-cancel', onClick: this.closeDialog}, i18n.cancel)
+			el('button', {type: 'button', class: 'ReportTypo-submit', onClick: this.submit}, state.isSending ? i18n.sending : i18n.send)
 		]),
 		el('div', null, state.isError && i18n.error)
 	]);
