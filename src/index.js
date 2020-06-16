@@ -25,7 +25,6 @@ function TypoReporter(props, rootNode) {
 	if (!props.translations[props.locale]) {
 		throw new Error('No translations defined for locale ' + props.locale);
 	}
-	props.messagePlaceholder = props.messagePlaceholder || '';
 	this.i18n = props.translations[props.locale];
 	this.props = props;
 	this.node = rootNode;
@@ -53,6 +52,7 @@ TypoReporter.prototype.translations = {
 	en: {
 		header: 'Report a mistake on the page',
 		messageLabel: 'There is a mistake in the following text:',
+		messagePlaceholder: 'Comment',
 		commentLabel: '<strong>Do you want to send a notice to a webmaster?</strong>',
 		send: '<strong>Send</strong>',
 		sending: 'Sending',
@@ -62,6 +62,7 @@ TypoReporter.prototype.translations = {
 	ru: {
 		header: 'Сообщите об ошибке на странице',
 		messageLabel: 'Ошибка содержится в следующем тексте:',
+		messagePlaceholder: 'Сообщение',
 		commentLabel: '<strong>Отправить сообщение об ошибке редактору сайта?</strong>',
 		send: '<strong>Отправить</strong>',
 		sending: 'Отправляю',
@@ -86,7 +87,7 @@ TypoReporter.prototype.render = function () {
 					{
 						class: 'ReportTypo-comment',
 						onKeyup: this.handleCommentChange,
-						placeholder: this.props.messagePlaceholder
+						placeholder: i18n.messagePlaceholder
 					},
 					state.comment
 				)
