@@ -25,6 +25,7 @@ function TypoReporter(props, rootNode) {
 	if (!props.translations[props.locale]) {
 		throw new Error('No translations defined for locale ' + props.locale);
 	}
+	props.messagePlaceholder = props.messagePlaceholder || '';
 	this.i18n = props.translations[props.locale];
 	this.props = props;
 	this.node = rootNode;
@@ -81,7 +82,14 @@ TypoReporter.prototype.render = function () {
 			el('div', {class: 'ReportTypo-label'}, i18n.messageLabel),
 			el('div', {class: 'ReportTypo-message'}, state.snippet.replace('>>>', '<u class="ReportTypo-heighlight">').replace('<<<', '</u>')),
 			el('div', {class: 'ReportTypo-comment-container'}, [
-				el('textarea', {class: 'ReportTypo-comment', onKeyup: this.handleCommentChange}, state.comment)
+				el('textarea',
+					{
+						class: 'ReportTypo-comment',
+						onKeyup: this.handleCommentChange,
+						placeholder: 'Test'
+					},
+					state.comment
+				)
 			]),
 			el('div', {class: 'ReportTypo-label'}, i18n.commentLabel),
 			el('div', {class: 'ReportTypo-submit-container'}, [
