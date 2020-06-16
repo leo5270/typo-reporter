@@ -82,7 +82,7 @@ TypoReporter.prototype.render = function () {
 			el('textarea', {class: 'ReportTypo-comment', onKeyup: this.handleCommentChange}, state.comment)
 		]),
 		el('div', {class: 'ReportTypo-label'}, i18n.commentLabel),
-		el('div', {style: 'text-align: right;'}, [
+		el('div', {class: 'ReportTypo-submit-container'}, [
 			el('button', {type: 'button', class: 'ReportTypo-submit', onClick: this.submit}, state.isSending ? i18n.sending : i18n.send)
 		]),
 		el('div', null, state.isError && i18n.error)
