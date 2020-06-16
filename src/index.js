@@ -73,19 +73,22 @@ TypoReporter.prototype.render = function () {
 	var state = this.state;
 	var i18n = this.i18n;
 
-	return state.isOpen && el('div', {class: 'ReportTypo'}, [
-		el('button', {type: 'button', class: 'ReportTypo-cancel', onClick: this.closeDialog}),
-		el('div', {class: 'ReportTypo-header'}, i18n.header),
-		el('div', {class: 'ReportTypo-label'}, i18n.messageLabel),
-		el('div', {class: 'ReportTypo-message'}, state.snippet.replace('>>>', '<u class="ReportTypo-heighlight">').replace('<<<', '</u>')),
-		el('div', {class: 'ReportTypo-comment-container'}, [
-			el('textarea', {class: 'ReportTypo-comment', onKeyup: this.handleCommentChange}, state.comment)
-		]),
-		el('div', {class: 'ReportTypo-label'}, i18n.commentLabel),
-		el('div', {class: 'ReportTypo-submit-container'}, [
-			el('button', {type: 'button', class: 'ReportTypo-submit', onClick: this.submit}, state.isSending ? i18n.sending : i18n.send)
-		]),
-		el('div', null, state.isError && i18n.error)
+	return state.isOpen && el('div', {}, [
+		el('div', {class: 'ReportTypo-overlay', onClick: this.closeDialog}),
+		el('div', {class: 'ReportTypo'}, [
+			el('button', {type: 'button', class: 'ReportTypo-cancel', onClick: this.closeDialog}),
+			el('div', {class: 'ReportTypo-header'}, i18n.header),
+			el('div', {class: 'ReportTypo-label'}, i18n.messageLabel),
+			el('div', {class: 'ReportTypo-message'}, state.snippet.replace('>>>', '<u class="ReportTypo-heighlight">').replace('<<<', '</u>')),
+			el('div', {class: 'ReportTypo-comment-container'}, [
+				el('textarea', {class: 'ReportTypo-comment', onKeyup: this.handleCommentChange}, state.comment)
+			]),
+			el('div', {class: 'ReportTypo-label'}, i18n.commentLabel),
+			el('div', {class: 'ReportTypo-submit-container'}, [
+				el('button', {type: 'button', class: 'ReportTypo-submit', onClick: this.submit}, state.isSending ? i18n.sending : i18n.send)
+			]),
+			el('div', null, state.isError && i18n.error)
+		])
 	]);
 };
 
