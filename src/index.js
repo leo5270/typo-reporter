@@ -86,7 +86,7 @@ TypoReporter.prototype.render = function () {
 					{
 						class: 'ReportTypo-comment',
 						onKeyup: this.handleCommentChange,
-						placeholder: 'Test'
+						placeholder: this.props.messagePlaceholder
 					},
 					state.comment
 				)
